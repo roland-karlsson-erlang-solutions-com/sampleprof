@@ -6,7 +6,7 @@
 %%% @end
 %%% Created : 22 May 2014 by
 %%%-------------------------------------------------------------------
--module(sampler_agent).
+-module(sample_agent).
 
 -behaviour(gen_server).
 
@@ -65,7 +65,7 @@ stop_sampling() ->
 %% @doc
 %% Stops the server
 %%
-%% @spec start_link() -> ok
+%% @spec stop() -> ok
 %% @end
 %%--------------------------------------------------------------------
 stop() ->
