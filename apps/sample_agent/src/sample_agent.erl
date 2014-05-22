@@ -102,7 +102,6 @@ handle_cast({start_sampling, Receiver, Interval},
 		      timer_ref = TimerRef }};
 
 handle_cast(stop_sampling, #state{ timer_ref = TimerRef }) ->
-    erlang:display(stopping),
     do_stop_sampling(TimerRef),
     {noreply, #state{ sampling_enabled = false} };
 
@@ -154,7 +153,7 @@ do_perform_sampling(RunningProcs, Receiver) ->
     StackTraces = [ proplists:lookup(current_stacktrace, PI) ||
 		      PI <- [ get_process_info(P) || P <- RunningProcs ],
 		      PI =/= undefined,
-		      proplists:lookup(status, PI) =:= running ],
+		      proplists:lookup(status, PI) =:= {status, running} ],
     Receiver ! {stacktrace_sample, self(), StackTraces}.
 
 start_trace_running() ->
